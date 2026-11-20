@@ -3,23 +3,101 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GTA VI trophy checklist</title>
+<title>Leonida Trophy Guide — Grand Theft Auto VI</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <h1>GTA VI trophy checklist</h1>
-  <p id="progress">0 of 55 earned</p>
+<header class="masthead">
+  <p class="eyebrow">Grand Theft Auto VI &middot; PlayStation 5 &middot; 55 trophies</p>
+  <h1>Leonida Trophy Guide</h1>
+  <p class="tagline">Every trophy, in your own words, with its sources &mdash; and a checklist that remembers where you are.</p>
+  <div class="progress-wrap">
+    <div class="progress-line"><strong id="progress-text">0 of 55 earned</strong><span id="progress-pct">0%</span></div>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+    <p class="grade-counts" id="grade-counts"></p>
+  </div>
 </header>
-<div class="controls">
-  <label>Grade <select id="grade"><option value="all">All</option><option value="platinum">Platinum</option><option value="gold">Gold</option><option value="silver">Silver</option><option value="bronze">Bronze</option></select></label>
-  <button id="export" type="button">Export progress</button>
-  <label class="import">Import progress <input id="import" type="file" accept="application/json"></label>
-</div>
-<table>
-  <thead><tr><th>Earned</th><th>Trophy</th><th>Grade</th><th>How to get it</th></tr></thead>
-  <tbody id="rows"></tbody>
-</table>
+
+<nav class="tabs" aria-label="Guide sections">
+  <button type="button" class="tab active" data-tab="checklist">Checklist</button>
+  <button type="button" class="tab" data-tab="roadmap">Roadmap to platinum</button>
+  <button type="button" class="tab" data-tab="missables">Missables</button>
+  <button type="button" class="tab" data-tab="about">About &amp; sources</button>
+</nav>
+
+<section id="view-checklist" class="view active">
+  <div class="controls">
+    <label class="search-label">Search <input id="search" type="search" placeholder="Trophy name or description&hellip;" autocomplete="off"></label>
+    <label>Grade
+      <select id="grade-filter">
+        <option value="all">All grades</option>
+        <option value="platinum">Platinum</option>
+        <option value="gold">Gold</option>
+        <option value="silver">Silver</option>
+        <option value="bronze">Bronze</option>
+      </select>
+    </label>
+    <label>Kind
+      <select id="kind-filter">
+        <option value="all">All kinds</option>
+        <option value="story">Story</option>
+        <option value="activities">Activities</option>
+        <option value="collectibles">Collectibles</option>
+        <option value="crime">Crime &amp; money</option>
+        <option value="contacts">Contacts &amp; strangers</option>
+        <option value="completion">Completion</option>
+        <option value="misc">Everything else</option>
+        <option value="watch">Watch list</option>
+        <option value="online">Online</option>
+      </select>
+    </label>
+    <label class="check"><input id="spoiler-toggle" type="checkbox" checked> Hide story spoilers</label>
+    <label class="check"><input id="earned-only" type="checkbox"> Earned only</label>
+    <button id="export-btn" type="button">Export progress</button>
+    <label class="import-btn">Import progress <input id="import-file" type="file" accept="application/json,.json"></label>
+    <button id="reset-btn" type="button">Reset</button>
+  </div>
+  <p class="list-count" id="list-count"></p>
+  <div class="layout">
+    <ul class="trophy-list" id="trophy-list"></ul>
+    <aside class="detail" id="detail" aria-live="polite"></aside>
+  </div>
+</section>
+
+<section id="view-roadmap" class="view">
+  <h2>Roadmap to the platinum</h2>
+  <p>Six stages, in the order to play them. Story first, then the people of Leonida, then activities, collections and crime, and the cleanup last. The platinum, Vice Got a Price!, unlocks when the other 54 are done.</p>
+  <div id="roadmap"></div>
+</section>
+
+<section id="view-missables" class="view">
+  <h2>Missables</h2>
+  <p><strong>No trophy in the official list is confirmed missable.</strong> Every story trophy unlocks by finishing a mission or a chapter, and the collectibles, counts and activities can all be finished after the story. That is what the official descriptions say, and this guide does not invent a missable where the list shows none.</p>
+  <p>Three trophies are on the watch list instead: they need a partner beside you, or a second attempt, so grab them while the chance is there.</p>
+  <div id="watch-list"></div>
+  <h3>Safe to leave until later</h3>
+  <p>Everything else can be done after the finale: all 12 story trophies come from playing the story, the collections (cards, WAiNK spots, meditation spots, vehicles, areas, garages) stay open, and the counted tasks (stunts, challenges, races, choices) keep counting.</p>
+</section>
+
+<section id="view-about" class="view">
+  <h2>About &amp; sources</h2>
+  <p>This guide is a free, open-source, offline web app. It loads only its own files and works with the network off. No Rockstar logo and no official artwork appear anywhere in it; the look is its own.</p>
+  <h3>Where the facts come from</h3>
+  <ul>
+    <li><strong>Exophase</strong> (exophase.com) &mdash; the official trophy list: every name, description and grade, and the counts the descriptions give (250 stunts, 42 Shooting Range challenges, 14 drone race locations, 18 meditation spots, 52 areas, 9 gangs, 8 garages).</li>
+    <li><strong>PSNProfiles</strong> (psnprofiles.com) &mdash; the PSN counts the list does not spell out, such as the count of 500 tracked for Actions Speak Louder, and community findings for the trophies whose descriptions give no step.</li>
+    <li><strong>My own words</strong> &mdash; every guide is written for this entry from the official description. Where a description gives no location or step, the guide says so plainly instead of guessing one.</li>
+  </ul>
+  <h3>The list at a glance</h3>
+  <p id="about-stats"></p>
+  <h3>Your progress</h3>
+  <p>Ticking a trophy saves it in this browser (localStorage) and nowhere else. Export downloads your progress as a JSON file; import reads one back. Nothing is sent anywhere.</p>
+</section>
+
+<footer>
+  <p>Unofficial fan guide. Grand Theft Auto, GTA and Rockstar Games belong to their owners. Trophy names and descriptions are shown as PlayStation publishes them.</p>
+</footer>
+
 <script type="module" src="app.js"></script>
 </body>
 </html>
